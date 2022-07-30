@@ -1,0 +1,13 @@
+version: '3'
+
+volumes:
+  aws:
+
+services:
+  aws-cli:
+    build:
+      context: .
+      dockerfile: ./aws/Dockerfile
+    tty: true
+    volumes:
+      - aws:/root/.aws 
