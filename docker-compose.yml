@@ -11,3 +11,13 @@ services:
     tty: true
     volumes:
       - aws:/root/.aws 
+
+  terraform:
+    image: hashicorp/terraform:1.2.6
+    env_file:
+      - .aws.env
+    volumes:
+      - ./terraform:/src
+    working_dir: /src
+    entrypoint: ["sh"]
+    tty: true
