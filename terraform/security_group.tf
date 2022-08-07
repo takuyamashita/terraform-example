@@ -84,7 +84,7 @@ resource "aws_security_group_rule" "app_out_tcp3306" {
   protocol                 = "tcp"
   from_port                = 3306
   to_port                  = 3306
-  source_security_group_id = aws_security_group.db-sg.id
+  source_security_group_id = aws_security_group.db_sg.id
 }
 
 #opmng security group
@@ -100,7 +100,7 @@ resource "aws_security_group" "opmng_sg" {
   }
 }
 
-resource "aws_security_group_rule" "opmng-in-ssh" {
+resource "aws_security_group_rule" "opmng_in_ssh" {
   security_group_id = aws_security_group.opmng_sg.id
   type              = "ingress"
   protocol          = "tcp"
@@ -109,7 +109,7 @@ resource "aws_security_group_rule" "opmng-in-ssh" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "opmng-in-tcp3000" {
+resource "aws_security_group_rule" "opmng_in_tcp3000" {
   security_group_id = aws_security_group.opmng_sg.id
   type              = "ingress"
   protocol          = "tcp"
@@ -118,7 +118,7 @@ resource "aws_security_group_rule" "opmng-in-tcp3000" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "opmng-out-http" {
+resource "aws_security_group_rule" "opmng_out_http" {
   security_group_id = aws_security_group.opmng_sg.id
   type              = "egress"
   protocol          = "tcp"
@@ -127,7 +127,7 @@ resource "aws_security_group_rule" "opmng-out-http" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "opmng-out-https" {
+resource "aws_security_group_rule" "opmng_out_https" {
   security_group_id = aws_security_group.opmng_sg.id
   type              = "egress"
   protocol          = "tcp"
@@ -137,7 +137,7 @@ resource "aws_security_group_rule" "opmng-out-https" {
 }
 
 #db security group
-resource "aws_security_group" "db-sg" {
+resource "aws_security_group" "db_sg" {
   name        = "${var.project}-${var.environment}-db-sg"
   description = "database security group"
   vpc_id      = aws_vpc.vpc.id
@@ -149,8 +149,8 @@ resource "aws_security_group" "db-sg" {
   }
 }
 
-resource "aws_security_group_rule" "db-in-tcp3306" {
-  security_group_id        = aws_security_group.db-sg.id
+resource "aws_security_group_rule" "db_in_tcp3306" {
+  security_group_id        = aws_security_group.db_sg.id
   type                     = "ingress"
   protocol                 = "tcp"
   from_port                = 3306
